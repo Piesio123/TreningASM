@@ -1,0 +1,10 @@
+Kompilacja:
+nasm -f elf64 -o hello.o hello.asm
+ld hello.o -o hello
+
+Skrót:
+compileasm [plik.asm]
+
+
+Wywołania systemowe:
+https://www.chromium.org/chromium-os/developer-library/reference/linux-constants/syscalls/

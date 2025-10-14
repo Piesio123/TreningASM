@@ -1,0 +1,16 @@
+hjkl - nawigacja, czyli chodzenie na wszystkie możliwe strony świata 2D
+iIaA - editing in line
+xr - making changes while in command mode
+
+
+u -> undo
+Ctrl + r -> redo
+Ctrl + Shift + V -> wkleja
+Ctrl + Shift + C -> kopiuje 
+
+v-> virtual mode
+y - yank (kopiuj)
+d - delete (usuń)
+p - paste
+
+
