@@ -31,12 +31,25 @@ SYS_EXIT equ 60
 ;	
 ;%enmacro
 
+%macro CyszczenieBuforanaAdresie 2;
+	mov r11, %1   ;Adresu bufora
+	mov r12, %2   ;Ilość bajtów
+	call _wyzerujBufor
+
+
+%endmacro	
+
+
 %macro GetNumberToAdres 1 ; Pojawi się interfejs w który będzie można wpisać liczbę ( a tak na prawde dowolne co zdefiniowane w ASCI
 	mov rsi, %1
 	call _getNumber
 %endmacro
 	
-%macro AddNumbers
+%macro ConvertAsciToNumber 1; Funkcja potrzebna do przekształcenie ASCI do liczby czytanej przez rejestr
+	call _PoliczdlugoscDB %1 ;liczy dlługość liczby i wynik jest zapisany w 
+	
+%endmacro
+
 
 
 
@@ -79,6 +92,19 @@ _start:
 
 
 ;Funkcje:
+_wyzerujBufor:
+	
+        add r11, r12
+
+	_loop:
+		mov [r11], 0
+        	sub r11, 1
+        	sub r12, 1
+        	cmp r12, 1
+       		je _loop
+        	ret
+
+
 
 _PoliczdlugoscDB: ; funkcja powiązana z makrem PrintText, służy do policzenia długości tekstu
 	
