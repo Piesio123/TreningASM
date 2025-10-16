@@ -27,7 +27,16 @@ SYS_EXIT equ 60
 	call _exit
 %endmacro	
 
+;%macro Dodawanie 2
+;	
+;%enmacro
 
+%macro GetNumberToAdres 1 ; Pojawi się interfejs w który będzie można wpisać liczbę ( a tak na prawde dowolne co zdefiniowane w ASCI
+	mov rsi, %1
+	call _getNumber
+%endmacro
+	
+%macro AddNumbers
 
 
 
@@ -36,17 +45,28 @@ section .data
 	tekst2 db "RKS",10,0 ; jakieś ciągi znaków
 	tekst3 db "Klub",10,0
 
+
 section .bss
-	name resb 64 ;reserwuje 16 bajtow
+	name resb 64 ;reserwuje 16 bajtow (nie wiem o co mi tutaj chodziło, chyba tam można dać po prostu 16 zamiast 64)
 	namelength resb 64 
+	number1 resb 8
+	number2 resb 8
 
 section .text
 	global _start
 
 	
 _start:
-	PrintText tekst2
-	PrintText tekst3
+
+
+	GetNumberToAdres number1 ;P
+	GetNumberToAdres number2
+	
+	PrintText number1
+	PrintText number2
+
+
+	
 	Exit 0
 
 
@@ -92,6 +112,12 @@ _getName: ;funkcja która pobiera wartości wpisane na konsoli do bajtów zaczyn
         mov rdi, 0 ; typ input
         mov rsi, name
         mov rdx, 16
+	syscall
+	ret
+_getNumber: ;tworzy wywołanie systemowe, które zapisuje numer do wskazanego adresu (to jest funkcja, która służy do obsługi makra get Number
+	mov rax, SYS_READ ; sys_read
+        mov rdi, STDIN ; typ input
+        mov rdx, 8
 	syscall
 	ret
 
@@ -194,7 +220,7 @@ _exit: ; wiadomo
 ;rsp -> wskazuje na górę stosu 
 ;rbp -> jakieś gówno do związane ze stosem
 ;
-'
+;
 ;
 ;6. Warunkowe skoki
 ;Przykładowe flagi:
