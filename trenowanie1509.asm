@@ -72,8 +72,12 @@ section .text
 _start:
 
 
-	GetNumberToAdres number1 ;P
-	GetNumberToAdres number2
+
+	CyszczenieBuforanaAdresie number1, 8
+	CyszczenieBuforanaAdresie number2, 8
+ 
+	;GetNumberToAdres number1 
+	;GetNumberToAdres number2
 	
 	PrintText number1
 	PrintText number2
@@ -97,11 +101,11 @@ _wyzerujBufor:
         add r11, r12
 
 	_loop:
-		mov [r11], 0
+		mov byte  [r11], 74
         	sub r11, 1
         	sub r12, 1
         	cmp r12, 1
-       		je _loop
+       		jne _loop
         	ret
 
 
